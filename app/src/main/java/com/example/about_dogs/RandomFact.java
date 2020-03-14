@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +24,7 @@ public class RandomFact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_fact);
 
+        //I execute the class I use to get the 10 random facts from the JSON Object the API gave at the url I pass as parameter
         fa.execute("https://dog-api.kinduff.com/api/facts?number=10");
         try {
             FACTS = fa.get();
@@ -33,13 +33,15 @@ public class RandomFact extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //I link the objects on the xml file here
         ListView listView= findViewById(R.id.listView);
         listView.setBackgroundResource(R.drawable.custom_shape);
 
+        //I call the custom Adapter I did
         FactAdapter factAdapter = new FactAdapter();
-
         listView.setAdapter(factAdapter);
 
+        //Button to go back to the home page
         Button button_home = findViewById(R.id.button_home);
         button_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +54,7 @@ public class RandomFact extends AppCompatActivity {
             }
         });
 
+        //Button to refresh the activity, the facts being random you will see other facts
         Button button_refresh = findViewById(R.id.button_refresh_pink);
         button_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,10 +87,10 @@ public class RandomFact extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup){
-            view = getLayoutInflater().inflate(R.layout.content_fact, null);
+            view = getLayoutInflater().inflate(R.layout.content_fact, null);  //I select the xml file of the content of the listView to display the random facts
 
-            TextView textView_fact = view.findViewById(R.id.textView);
-            textView_fact.setText(FACTS.get(i));
+            TextView textView_fact = view.findViewById(R.id.textView);// I link the TexTView to the one I declared in the xml file
+            textView_fact.setText(FACTS.get(i)); //and I set its text with the values I got from the Json file
             return view;
         }
     }

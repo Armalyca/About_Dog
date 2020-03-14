@@ -23,13 +23,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class BitmapDownloaderTask extends AsyncTask<String, Integer, Bitmap> {
 
     private Vector<String> links = new Vector<>();
-    private static ArrayList<Bitmap> arrayOfImages = new ArrayList<Bitmap>();
     private Context ctxt;
     private ListView listView;
     // Create the adapter to convert the array to views
@@ -49,9 +47,9 @@ public class BitmapDownloaderTask extends AsyncTask<String, Integer, Bitmap> {
         String breed = params[0];
         URL url = null;
         try {
-            url = new URL("https://dog.ceo/api/breed/"+breed+"/images/random/5");
+            url = new URL("https://dog.ceo/api/breed/"+breed+"/images/random/5"); // the url is created by using the breed selected on the precedent activity, passed as a parameter to this class
 
-            Log.i("Mathilde", url.toString());
+            Log.i("MK", url.toString()); //a log to check the url, if you don't have 5 pictures or you always have the same, you can check every picture of this breed from the API the url by deleting "/random/5"
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setUseCaches(false);
             urlConnection.connect();
@@ -64,8 +62,8 @@ public class BitmapDownloaderTask extends AsyncTask<String, Integer, Bitmap> {
                 JSONObject jsonObj = new JSONObject(s);
                 JSONArray items = jsonObj.getJSONArray("message");
                 for (int i = 0; i < items.length(); i++) {
-                    String link = items.getString(i);
-                    links.add(link);
+                    String link = items.getString(i); //I take every pictures in the jsonObject
+                    links.add(link); //I add every pictures to my Vector of Strings
                 }
 
             } catch (JSONException e) {
@@ -90,15 +88,11 @@ public class BitmapDownloaderTask extends AsyncTask<String, Integer, Bitmap> {
         RequestQueue queue = Volley.newRequestQueue(ctxt);
 
         for (String url : links) {
-            // Request an image response from the provided URL.
-            Log.i("URL", url);
             ImageRequest imageRequest = new ImageRequest(url,
                     new Response.Listener<Bitmap>() {
 
                         @Override
                         public void onResponse(Bitmap response) {
-                            // Display the first 500 characters of the response string.
-                            Log.i("JFL", "success");
                             adapter.add(response);
                         }
 

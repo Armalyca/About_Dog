@@ -2,7 +2,6 @@ package com.example.about_dogs;
 
 import android.os.AsyncTask;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,8 +18,7 @@ import java.util.Vector;
 
 public class BreedAsync extends AsyncTask<String, Integer, ArrayList<String>> {
 
-    private Vector<String> links = new Vector<>();
-    private ArrayList<String> pics = new ArrayList<>();
+    private ArrayList<String> breeds_name = new ArrayList<>();
 
     private String readStream(InputStream is) {
         try {
@@ -46,7 +44,7 @@ public class BreedAsync extends AsyncTask<String, Integer, ArrayList<String>> {
             e.printStackTrace();
         }
         try {
-            HttpURLConnection urlConnection = (HttpURLConnection) url2.openConnection();
+            HttpURLConnection urlConnection = (HttpURLConnection) url2.openConnection(); // I use the url passed as a parameter
             urlConnection.setUseCaches(false);
             urlConnection.connect();
 
@@ -59,9 +57,9 @@ public class BreedAsync extends AsyncTask<String, Integer, ArrayList<String>> {
                 JSONObject message = jsonObj.getJSONObject("message");
                 Iterator<String> keys = message.keys();
                 while (keys.hasNext()) {
-                    pics.add(keys.next());
+                    breeds_name.add(keys.next()); //I add every name of breed to the ArrayList of String
                 }
-                return pics;
+                return breeds_name;
 
             } catch (JSONException e) {
                 e.printStackTrace();

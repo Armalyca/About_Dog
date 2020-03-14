@@ -20,7 +20,6 @@ import java.util.Vector;
 
 public class FactAsync extends AsyncTask <String, Integer, ArrayList<String>>{
 
-    private Vector<String> links = new Vector<>();
     private ArrayList<String> facts = new ArrayList<>();
 
     private String readStream(InputStream is) {
@@ -47,7 +46,7 @@ public class FactAsync extends AsyncTask <String, Integer, ArrayList<String>>{
             e.printStackTrace();
         }
         try {
-            HttpURLConnection urlConnection = (HttpURLConnection) url2.openConnection();
+            HttpURLConnection urlConnection = (HttpURLConnection) url2.openConnection(); // I use the url passed as a parameter
             urlConnection.setUseCaches(false);
             urlConnection.connect();
 
@@ -57,10 +56,10 @@ public class FactAsync extends AsyncTask <String, Integer, ArrayList<String>>{
             try {
 
                 JSONObject jsonObj = new JSONObject(s);
-                JSONArray items = jsonObj.getJSONArray("facts");
+                JSONArray items = jsonObj.getJSONArray("facts"); 
                 for (int i = 0; i < items.length(); i++) {
-                    String link = items.getString(i);
-                    facts.add(link);
+                    String link = items.getString(i); //I take every facts in the jsonObject
+                    facts.add(link); //I add every facts to the ArrayList of String
                 }
                 return facts;
 

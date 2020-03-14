@@ -3,11 +3,7 @@ package com.example.about_dogs;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.view.Menu;
@@ -21,26 +17,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //This button will open the activity about the facts
         Button button_facts = findViewById(R.id.button_facts);
-
         button_facts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Intent code for open new activity through intent.
                 Intent intent = new Intent(MainActivity.this, RandomFact.class);
                 startActivity(intent);
 
             }
         });
 
+        //This button will open the activity to select a breed to see its pictures
         Button button_pics = findViewById(R.id.button_pictures);
-
         button_pics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Intent code for open new activity through intent.
                 Intent intent = new Intent(MainActivity.this, ChooseBreed.class);
                 startActivity(intent);
 

@@ -19,9 +19,9 @@ class ImageAdapter extends ArrayAdapter<Bitmap> {
         // Get the data item for this position
         Bitmap image = getItem(position);
 
-        convertView = LayoutInflater.from(getContext()).inflate(R.layout.content_breed_result, parent, false);
+        convertView = LayoutInflater.from(getContext()).inflate(R.layout.content_breed_result, parent, false); //I select the xml file of the content of the listView to display the pictures of the breed selected
 
-        ImageView imageView_result = convertView.findViewById(R.id.imageView);
+        ImageView imageView_result = convertView.findViewById(R.id.imageView); // I link the ImageView to the one I declared in the xml file
 
         // Populate the data into the template view using the data object
         imageView_result.setImageBitmap(image);
